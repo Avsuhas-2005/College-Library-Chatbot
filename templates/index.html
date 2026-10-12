@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>College Library Chatbot</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>📚 College Library</h1>
+        <p>Your smart library assistant</p>
+    </header>
+
+    <main>
+
+        <section class="library">
+
+            <h2>Available Books</h2>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search books by name or author..."
+            >
+
+            <div class="book-container" id="bookContainer">
+
+                {% for book in books %}
+
+                <div class="book-card">
+
+                    <h3>{{ book.name }}</h3>
+
+                    <p><strong>Book ID:</strong> {{ book.id }}</p>
+
+                    <p><strong>Author:</strong> {{ book.author }}</p>
+
+                    <p><strong>Department:</strong> {{ book.department }}</p>
+
+                    <p>
+                        <strong>Available Copies:</strong>
+                        {{ book.copies }}
+                    </p>
+
+                    {% if book.copies > 0 %}
+                    <span class="available">Available</span>
+                    {% else %}
+                    <span class="unavailable">Not Available</span>
+                    {% endif %}
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <section class="chat-section">
+
+            <h2>💬 Library Chatbot</h2>
+
+            <p>Ask me about any book in the library.</p>
+
+            <div id="chatBox">
+
+                <div class="bot-message">
+                    Hello! Welcome to the College Library.
+                    Ask me about a book, its author, or availability.
+                </div>
+
+            </div>
+
+            <form id="chatForm">
+
+                <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Ask about a book..."
+                    autocomplete="off"
+                    required
+                >
+
+                <button type="submit">Send</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>College Library Chatbot | Student Project</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
